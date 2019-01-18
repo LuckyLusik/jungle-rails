@@ -11,6 +11,7 @@ before_filter :authorize
     order  = create_order(charge)
 
     if order.valid?
+      UserMailer.thankyou_email(@current_user, @order).deliver_later
       empty_cart!
       redirect_to order, notice: 'Your Order has been placed.'
     else
