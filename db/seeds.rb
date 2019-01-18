@@ -132,5 +132,25 @@ cat3.products.create!({
   price: 2_483.75
 })
 
+cat1.products[1].reviews.create!({
+product_id: 2,
+user_id: 1,
+description: "So-so",
+rating: 3
+})
+
+cat2.products[0].reviews.create!({
+product_id: 1,
+user_id: 1,
+description: "Funy",
+rating: 4
+})
+
+cat1.products[2].reviews.create!({
+product_id: 3,
+user_id: 1,
+description: "Cool",
+rating: 5
+})
 
 puts "DONE!"

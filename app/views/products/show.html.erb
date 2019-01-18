@@ -26,6 +26,19 @@
       </div>
     </div>
 
+    <h4>Please, leave your review</h4>
+    <%= form_for :review, url: product_reviews_path(@product.id) do |f| %>
+      <li>Description: <%= f.text_area :description %></li>
+      <li>Rating: <%= f.select :rating, [1, 2, 3, 4, 5] %></li>
+      <li><%= f.submit "Submit" %></li>
+    <% end %>
+
+
+    <% @product.reviews.each do |review| %>
+    <div>Rating: <%= review.rating %></div>
+    <div>Comment: <%= review.description %></div>
+    <% end %>
+
   </article>
 
 </section>
