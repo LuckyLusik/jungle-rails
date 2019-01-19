@@ -26,17 +26,25 @@
       </div>
     </div>
 
-    <h4>Please, leave your review</h4>
+    <% if current_user then %>
+    <div>
     <%= form_for :review, url: product_reviews_path(@product.id) do |f| %>
+    <h4>Please, leave your review</h4>
       <li>Description: <%= f.text_area :description %></li>
       <li>Rating: <%= f.select :rating, [1, 2, 3, 4, 5] %></li>
       <li><%= f.submit "Submit" %></li>
     <% end %>
+  </div>
+  <% end %>
 
 
-    <% @product.reviews.each do |review| %>
+    <% @product.reviews.order(created_at: :desc).each do |review| %>
     <div>Rating: <%= review.rating %></div>
     <div>Comment: <%= review.description %></div>
+
+    <% if current_user.id == review.user_id then %>
+     <%= button_to "Delete comment", product_review_path(review.product_id, review.id), :method => :delete %>
+    <% end %>
     <% end %>
 
   </article>
